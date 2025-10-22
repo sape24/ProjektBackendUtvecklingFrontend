@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/css/style.css">
+    <script src="../src/js/main.js" type="module"></script>
+    <title>Startsida</title>
+</head>
+<body>
+    <header>  
+        <nav class="desktopmenu"> <!--Desktopmenyn-->
+            <ul>
+                <li><a href="index.html">Startsida</a></li>
+                <li><a href="menu.html">Meny</a></li>
+                <li><a href="login.html">Logga in</a></li>
+            </ul>
+        </nav> 
+    
+            <button class="menu-btn open" id="open-menu"> <!--Knapp för att toggle fram hamburgermenyn-->
+                    <span class="menu-icon">
+                        <span class="bars"></span>
+                        <span class="bars"></span>
+                        <span class="bars"></span>
+                    </span>
+                    <span class="menu-text">Meny</span>
+            </button>
+
+        <nav class="mobilemenu" id="mobilemenu"> <!--Hamburgermeny för mobila enheter med en knapp för att stänga ner den-->
+            <button class="menu-btn close" id="close-menu">
+                <span class="menu-icon">
+                    <span class="bars cross1"></span>
+                    <span class="bars cross2"></span>
+                </span>
+                <span class="menu-text">Stäng meny</span>
+            </button>
+            <ul>
+                <li><a href="index.html">Startsida</a></li>
+                <li><a href="menu.html">Meny</a></li>
+                <li><a href="login.html">Logga in</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div id="indexcontainer">
+        <picture>
+            <img src="./images/image1.jpg" alt="Bild inuti restaurangen" id="heroimage">
+        </picture>
+        <section id="infobox">
+            <h2>Om restaurang Granit</h2>
+            <p> Granit är en modern restaurang där skandinavisk enkelhet möter kulinarisk finess. Vi serverar säsongsbaserade rätter tillagade på lokala råvaror, inspirerade av skärgårdens smaker. I vår harmoniska miljö står kvalitet, hantverk och omtanke i fokus.</p>
+        </section>
+    </div>
+
+    <footer>
+        <h2>Granit</h2>
+        <p>Västra Gatan 1</p>
+        <p>072-1234567</p>
+        <p>info@restauranggranit.com</p>
+        <p>© 2025 Granit Restaurang</p>
+    </footer>
+    
+</body>
+</html>
