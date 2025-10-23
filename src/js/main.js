@@ -19,8 +19,8 @@ function toggleMenu(){
 }
 
 const container = document.getElementById("menucontainer")
-
-fetch("https://projektbackendwebbutveckling.onrender.com/api/menu")
+if (container){
+    fetch("https://projektbackendwebbutveckling.onrender.com/api/menu")
     .then(response =>{
         if (!response.ok) throw new Error("Nätverksfel" + response.status)
         return response.json()
@@ -56,3 +56,51 @@ fetch("https://projektbackendwebbutveckling.onrender.com/api/menu")
         console.error("Fel vid hämtning av rätter", error)
         container.innerHTML = "<p>Kunde inte ladda menyn</p>"
     })
+}
+
+
+   
+async function login() {                    
+const user = {
+    username: document.getElementById("username").value,        //skapar ett objekt med värden från förmuläret
+    password: document.getElementById("password").value           
+}
+
+if(!user.username || !user.password ){                       //validering om nått fält i förmuläret är tomt return så funktionen stoppas
+    const error = document.getElementById("errormessage")
+    error.textContent = ("Du måste fylla i alla fält!")             
+    return                                                         
+}
+
+ try{
+    let response = await fetch("https://projektbackendwebbutveckling.onrender.com/api/auth/login", {       //post förfrågan till api
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'                               //anger att det är json som skickas
+    },
+        body: JSON.stringify(user)                                         //user objekt blir json sträng
+    });
+    if (!response.ok){
+            throw new Error ('Nätverksproblem - felaktigt svar från servern');
+        }
+        
+    let data = await response.json();
+        
+    localStorage.setItem('token', data.token)                    //sparar jwt token i localstorage
+    console.log("token sparad", data.token)
+    console.log(data)
+        
+    window.location.href = "admin.html"                           //om all stämmer redirect till adminsidan
+    }catch (error){
+    console.error('Det uppstod ett fel:', error.message);
+    document.getElementById("errormessage").textContent = "Inloggning misslyckades"
+    }
+} 
+
+const form = document.getElementById("loginForm")
+if(form){
+    form.addEventListener("submit", event =>{
+        event.preventDefault()
+        login()
+    })
+}

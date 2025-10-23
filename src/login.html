@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../src/css/style.css">
-    <script src="../src/js/main.js" type="module"></script>
+    <script src="../src/js/main.js" defer></script>
     <title>Inloggningssida</title>
 </head>
 <body>
@@ -41,5 +41,28 @@
             </ul>
         </nav>
     </header>
+    
+    <div id="logincontainer">
+        <form id="loginForm">
+            <label for="username">Användarnamn:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Lösenord:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Logga in</button>
+
+            <p id="errormessage"></p>
+        </form>
+    </div>
+
+    <footer>
+        <h2>Granit</h2>
+        <p>Västra Gatan 1</p>
+        <p>072-1234567</p>
+        <p>info@restauranggranit.com</p>
+        <p>© 2025 Granit Restaurang</p>
+    </footer>
+
 </body>
 </html>

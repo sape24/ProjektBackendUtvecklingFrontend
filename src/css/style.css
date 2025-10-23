@@ -212,3 +212,27 @@ footer{
     font-size: 1.2rem;
     font-family: 'dishFont', sans-serif;
 }
+
+#logincontainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70vh;
+    background-color: #e7d3c4;
+}
+
+#loginForm{
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    font-size: 1.4rem;
+    font-weight: bold;
+    background-color: #f9f6f0;
+    color: #2c1a1d;
+    border-radius: 20px;
+}
+
+#loginForm input{
+    font-size: 1.4rem;
+}
