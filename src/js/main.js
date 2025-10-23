@@ -17,3 +17,42 @@ function toggleMenu(){
         mobileMenuEl.style.display = "none"
     }
 }
+
+const container = document.getElementById("menucontainer")
+
+fetch("https://projektbackendwebbutveckling.onrender.com/api/menu")
+    .then(response =>{
+        if (!response.ok) throw new Error("Nätverksfel" + response.status)
+        return response.json()
+    })
+    .then(menu =>{
+        container.innerHTML = ""
+        
+        menu.forEach(dish => {
+            const article = document.createElement("article")
+            article.classList.add("dish")
+
+            const nameEl = document.createElement("h3")
+            nameEl.textContent = dish.name
+
+            const descEl = document.createElement("p")
+            descEl.textContent = dish.description
+
+            const priceEl = document.createElement("p")
+            priceEl.textContent = `${dish.price} kr`
+
+            const catEl = document.createElement("p")
+            catEl.textContent = dish.category
+
+            article.appendChild(nameEl)
+            article.appendChild(descEl)
+            article.appendChild(priceEl)
+            article.appendChild(catEl)
+
+            container.appendChild(article)
+        });  
+    })
+    .catch(error=>{
+        console.error("Fel vid hämtning av rätter", error)
+        container.innerHTML = "<p>Kunde inte ladda menyn</p>"
+    })

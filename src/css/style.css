@@ -3,6 +3,11 @@
     src: url(../font/CormorantGaramond-VariableFont_wght.ttf) format('truetype');
 }
 
+@font-face {
+    font-family: 'dishFont';
+    src: url(../font/CormorantGaramond-Italic-VariableFont_wght.ttf) format('truetype');
+}
+
 body, main{
     margin: 0;
     padding: 0;
@@ -188,4 +193,22 @@ footer{
     #indexcontainer{
         gap: 0;
     }
+}
+
+#menucontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e7d3c4;
+    width: 100%;
+}
+
+.dish{
+    background-color: #f9f6f0;
+    color: #2c1a1d;
+    padding: 1%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 1.2rem;
+    font-family: 'dishFont', sans-serif;
 }
