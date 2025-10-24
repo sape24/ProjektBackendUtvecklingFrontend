@@ -207,10 +207,12 @@ footer{
     background-color: #f9f6f0;
     color: #2c1a1d;
     padding: 1%;
-    padding-left: 5%;
-    padding-right: 5%;
+    width: 20%;
     font-size: 1.2rem;
     font-family: 'dishFont', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #logincontainer{
@@ -235,4 +237,110 @@ footer{
 
 #loginForm input{
     font-size: 1.4rem;
+}
+
+#admincontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    gap: 20px;   
+    background-color: #f9f6f0;
+}
+
+#addDishForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.hidden{
+    display: none;
+}
+
+#showmenu, #addDishButton{
+    background-color: white;
+    color: #2c1a1d;
+    border: 1px solid #2c1a1d;
+    padding: 2%;
+    border-radius: 15px;
+    font-size: 1.4rem;
+    font-weight: bolder;
+    cursor: pointer;
+    font-family: 'myFont';
+}
+
+#menuList{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#buttonContainer{
+    display: flex;
+    gap: 20px;
+}
+
+.adminDish{
+    border: 1px solid #2c1a1d;
+    border-radius: 5px;
+    color: #2c1a1d;
+    padding: 1%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 1.2rem;
+    font-family: 'dishFont', sans-serif;
+}
+
+.adminDish button, #editForm button{
+    background-color: white;
+    color: #2c1a1d;
+    border: 1px solid #2c1a1d;
+    border-radius: 15px;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    cursor: pointer;
+    font-family: 'myFont';
+    margin: 2%;
+}
+
+#addFormButton, #loginbutton{
+    background-color: #f9f6f0;
+    border: 1px solid #2c1a1d;
+    padding: 5%;
+    margin: 2%;
+    font-size: 1.4rem;
+    font-family: 'myFont';
+    cursor: pointer;
+}
+
+.editDish{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#editForm{
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    gap: 20px;
+}
+
+#editForm input{
+    font-size: 1.4rem;
+    font-family: 'myFont';
+    font-weight: bold;
+}
+
+#deleteButton{
+    border: 1px solid red;
+}
+
+#editButton{
+    border: 1px solid yellow;
 }

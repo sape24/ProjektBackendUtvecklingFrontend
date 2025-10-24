@@ -13,7 +13,7 @@
             <ul>
                 <li><a href="index.html">Startsida</a></li>
                 <li><a href="menu.html">Meny</a></li>
-                <li><a href="login.html">Logga in</a></li>
+                <li><a href="#" id="logout">Logga Ut</a></li>
             </ul>
         </nav> 
     
@@ -37,9 +37,30 @@
             <ul>
                 <li><a href="index.html">Startsida</a></li>
                 <li><a href="menu.html">Meny</a></li>
-                <li><a href="login.html">Logga in</a></li>
+                <li><a href="#" id="logout">Logga Ut</a></li>
             </ul>
         </nav>
     </header> 
+
+    <div id="admincontainer">
+        <h1>Adminsida</h1>
+        <div id="buttonContainer">
+            <button id="showmenu">Visa meny</button>
+            <button id="addDishButton">Lägg till rätt</button>
+        </div>
+        <section id="addDish" class="hidden">
+            <h2>Lägg till rätt</h2>
+            <form id="addDishForm">
+                <input type="text" id="name" placeholder="Namn" required>
+                <input type="text" id="description" placeholder="Beskrivning" required>
+                <input type="number" id="price" placeholder="Pris" required>
+                <input type="text" id="category" placeholder="Kategori" required>
+
+                <button type="submit" id="addFormButton">Spara</button>
+            </form>
+        </section>
+
+        <section id="menuList"></section>
+    </div>
 </body>
 </html>
