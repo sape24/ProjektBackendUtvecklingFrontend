@@ -18,19 +18,22 @@ function toggleMenu(){
     }
 }
 
-document.getElementById("logout").addEventListener("click", event =>{
+document.querySelectorAll(".logout").forEach(button =>{          //queryselector för att hämta logoutknapparna från mobil och desktopversion loopar genom båda och ger dom eventlisteners som tar bort token och skickar användaren till startsida
+    button.addEventListener("click", event =>{         
     event.preventDefault()
     localStorage.removeItem("token")
     window.location.href = "index.html"
+    })
 })
+    
 
-const showMenuButton = document.getElementById("showmenu")
+const showMenuButton = document.getElementById("showmenu")                  //hämtar element från adminsidan för att visa och hantera menyn
 const menuList = document.getElementById("menuList")
 const token = localStorage.getItem("token")
 
-showMenuButton.addEventListener("click", loadMenu)
+showMenuButton.addEventListener("click", loadMenu)                           //laddar in menyn när användaren klicka på visa menyn med hjälp av eventlistener
 
-async function loadMenu(){
+async function loadMenu(){                                                    //funktion som hämtar menyn från api
     fetch("https://projektbackendwebbutveckling.onrender.com/api/menu")
     .then(response =>{
         if (!response.ok) throw new Error("Nätverksfel" + response.status)
@@ -39,7 +42,7 @@ async function loadMenu(){
     .then(menu =>{
         menuList.innerHTML = ""
         
-        menu.forEach(dish => {
+        menu.forEach(dish => {                                        //loopar igenom varje rätt och skapar HTML element som visas i menyn
             const article = document.createElement("article")
             article.classList.add("adminDish")
 
@@ -58,12 +61,12 @@ async function loadMenu(){
             const editButton = document.createElement("button")
             editButton.textContent = "Ändra"
             editButton.id = "editButton"
-            editButton.addEventListener("click", () => editDish(dish))
+            editButton.addEventListener("click", () => editDish(dish))                     //skapar en ändra knapp som anropar editdish
 
             const deleteButton = document.createElement("button")
             deleteButton.textContent = "Ta bort"
             deleteButton.id = "deleteButton"
-            deleteButton.addEventListener("click", () => deleteDish(dish.id))
+            deleteButton.addEventListener("click", () => deleteDish(dish.id))                //skapar en ta bort knapp som anropar deletedish med id
 
             article.appendChild(nameEl)
             article.appendChild(descEl)
@@ -75,39 +78,39 @@ async function loadMenu(){
             menuList.appendChild(article)
         });  
     })
-    .catch(error=>{
+    .catch(error=>{                                                                 //felhantering vid misslyckad hämtning
         console.error("Fel vid hämtning av rätter", error)
         container.innerHTML = "<p>Kunde inte ladda menyn</p>"
     })
 }
-async function deleteDish(id){
-    if (!token){
+async function deleteDish(id){                                                              //funktion för att ta bort en rätt via api
+    if (!token){                                                           
         alert("ingen token hittades")
         window.location.href = "login.html"
         return
     }
 
     try{
-        const response = await fetch(`https://projektbackendwebbutveckling.onrender.com/api/menu/${id}`, {
+        const response = await fetch(`https://projektbackendwebbutveckling.onrender.com/api/menu/${id}`, {                //skicak delete förfrågan till backend med rätt id
         method: "DELETE",
         headers:{
-            "Authorization": "Bearer " + token
+            "Authorization": "Bearer " + token                                                           //skickar med JWT token för verifiering
         }
     })
-    if(!response.ok) throw new Error ("Kunde inte ta bort rätt")
+    if(!response.ok) throw new Error ("Kunde inte ta bort rätt")                          //felhantering samt await loadmeny för att ladda om menyn efter borttagning
         await loadMenu()
     } catch (err){
         console.error(err)
     }
 }
-function editDish(dish){
+function editDish(dish){                                                                 //funktion för att redigera en rätt
     const article = document.createElement("article")
     article.classList.add("editDish")
 
     const title = document.createElement("h3")
     title.textContent = "Ändra rätt"
 
-    const form = document.createElement("form")
+    const form = document.createElement("form")                                           //skapar formulär för redigering av rättens olika values
     form.id = "editForm"
 
     const nameInput = document.createElement("input")
@@ -147,13 +150,13 @@ function editDish(dish){
     article.appendChild(title)
     article.appendChild(form)
 
-    menuList.innerHTML = ""
+    menuList.innerHTML = ""                                              //rensar listan och visar bara redigeringsformuläret
     menuList.appendChild(article)
 
-    form.addEventListener("submit", async event => {
+    form.addEventListener("submit", async event => {                  //eventlistener för submit knapp när användaren spara ändringarna
         event.preventDefault()
 
-        const updatedDish = {
+        const updatedDish = {                                           //skapar ett objekt av värdena från formuläret för den uppdaterade rätten
             name: nameInput.value,
             description: descInput.value,
             price: priceInput.value,
@@ -166,7 +169,7 @@ function editDish(dish){
         }
 
         try{
-            const response = await fetch(`https://projektbackendwebbutveckling.onrender.com/api/menu/${dish.id}`, {
+            const response = await fetch(`https://projektbackendwebbutveckling.onrender.com/api/menu/${dish.id}`, {            //skicak put förfrågan för att uppdatera rätten
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -175,7 +178,7 @@ function editDish(dish){
                 body: JSON.stringify(updatedDish)
             })
 
-            if (!response.ok) throw new Error ("Kunde inte uppdatera rätt")
+            if (!response.ok) throw new Error ("Kunde inte uppdatera rätt")                               //laddar om menyn efter uppdatering
             await loadMenu()
         } catch (err) {
             console.error("Fel vid uppdatering", err)
@@ -187,17 +190,17 @@ const addDishButton = document.getElementById("addDishButton")
 const addDishContainer = document.getElementById("addDish")
 const addForm = document.getElementById("addDishForm")
 
-addDishButton.addEventListener("click", () =>{
+addDishButton.addEventListener("click", () =>{                                                      //visar eller döljer formuläret för att lägga till ny rätt
     addDishContainer.classList.toggle("hidden")
 })
 
-addForm.addEventListener("submit", event => {
+addForm.addEventListener("submit", event => {                                                   //eventlistener för lägg till rätt formuläret med preventdefault
     event.preventDefault()
     addDish()
 })
 
-async function addDish(){
-    const dish = {
+async function addDish(){                                                                      //funktion för att lägga till en ny rätt via api
+    const dish = {                                                                                 //skapar ett objekt med värdena från formuläret för den nya rätten
         name: addForm.name.value,
         description: addForm.description.value,
         price: addForm.price.value,
@@ -211,7 +214,7 @@ async function addDish(){
     }
 
     try{
-        const response = await fetch("https://projektbackendwebbutveckling.onrender.com/api/menu",{
+        const response = await fetch("https://projektbackendwebbutveckling.onrender.com/api/menu",{                    //skickar post förfrågan för att skapa ny rätt
             method: "POST",
             headers:{
             "Content-Type": "application/json",   
@@ -220,9 +223,9 @@ async function addDish(){
         body: JSON.stringify(dish)
     })
     if (!response.ok) throw new Error ("kunde inte lägga till rätt")
-    addForm.reset()
-    addDishContainer.classList.add("hidden")    
-    await loadMenu()
+    addForm.reset()                                                                                             //tömmer formuläret efter att rätten lagts till
+    addDishContainer.classList.add("hidden")                                                                       //döljer formuläret igen
+    await loadMenu()                                                                                              //laddar om menyn för att visa nya rätten
     } catch(err){
     console.error("Fel inträffade vid tilläggning av rätt", err)
     }

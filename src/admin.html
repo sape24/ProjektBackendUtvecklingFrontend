@@ -13,7 +13,7 @@
             <ul>
                 <li><a href="index.html">Startsida</a></li>
                 <li><a href="menu.html">Meny</a></li>
-                <li><a href="#" id="logout">Logga Ut</a></li>
+                <li><a href="#" class="logout">Logga Ut</a></li>
             </ul>
         </nav> 
     
@@ -37,18 +37,18 @@
             <ul>
                 <li><a href="index.html">Startsida</a></li>
                 <li><a href="menu.html">Meny</a></li>
-                <li><a href="#" id="logout">Logga Ut</a></li>
+                <li><a href="#" class="logout">Logga Ut</a></li>
             </ul>
         </nav>
     </header> 
 
-    <div id="admincontainer">
+    <div id="admincontainer">                                        <!-- Titel samt två knappar för att visa menyn eller för att visa formuläret som lägger till rätter-->
         <h1>Adminsida</h1>
         <div id="buttonContainer">
             <button id="showmenu">Visa meny</button>
             <button id="addDishButton">Lägg till rätt</button>
         </div>
-        <section id="addDish" class="hidden">
+        <section id="addDish" class="hidden">                                    <!-- Formulär för att lägga till rätter i menyn-->
             <h2>Lägg till rätt</h2>
             <form id="addDishForm">
                 <input type="text" id="name" placeholder="Namn" required>
@@ -60,7 +60,7 @@
             </form>
         </section>
 
-        <section id="menuList"></section>
+        <section id="menuList"></section>                              <!-- section som blir manipulerad av DOM för att visa menyn i adminsida dynamiskt-->
     </div>
 </body>
 </html>

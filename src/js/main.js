@@ -18,17 +18,17 @@ function toggleMenu(){
     }
 }
 
-const container = document.getElementById("menucontainer")
-if (container){
+const container = document.getElementById("menucontainer")                          //hämttar menucontainer där rätterna ska visas dynamiskt
+if (container){                                                                       //kontrollerar om elementet finns för att hindra fel på andra sidor utan meny
     fetch("https://projektbackendwebbutveckling.onrender.com/api/menu")
     .then(response =>{
         if (!response.ok) throw new Error("Nätverksfel" + response.status)
         return response.json()
     })
     .then(menu =>{
-        container.innerHTML = ""
+        container.innerHTML = ""                                                          //rensar container från tidigare innehåll
         
-        menu.forEach(dish => {
+        menu.forEach(dish => {                                                              //skapar HTML element för varje rätt och lägger till i menyn
             const article = document.createElement("article")
             article.classList.add("dish")
 
@@ -60,7 +60,7 @@ if (container){
 
 
    
-async function login() {                    
+async function login() {                                         //asynkron funktion som hanterar inloggning        
 const user = {
     username: document.getElementById("username").value,        //skapar ett objekt med värden från förmuläret
     password: document.getElementById("password").value           
@@ -97,8 +97,8 @@ if(!user.username || !user.password ){                       //validering om nå
     }
 } 
 
-const form = document.getElementById("loginForm")
-if(form){
+const form = document.getElementById("loginForm")                        //hämtar inloggnignsformuläret
+if(form){                                                               //kontroll ifall formuläret finns så lägger det till en eventlistener med preventdefault för att hindra sidomladdning och sedan anropar login funktion
     form.addEventListener("submit", event =>{
         event.preventDefault()
         login()
